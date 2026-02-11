@@ -1,9 +1,19 @@
+# Compiled outputs
 *.exe
 *.obj
 *.ilk
 *.pdb
-.vs/
-.vscode/
+*.out
+
+# Build folders
 Debug/
 Release/
 x64/
+build/
+out/
+
+# IDE/editor folders
+.vs/
+.vscode/
+.idea/
+cmake-build-*/
