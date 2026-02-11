@@ -2,8 +2,12 @@
 #include <vector>
 #include <string>
 #include <cctype>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
+
+
 
 bool sensitiveStrings(const string &text1,
                       const string &text2)
@@ -41,125 +45,67 @@ bool sensitiveStrings(const string &text1,
     j++;
   }
 
-  return j == text2.length();
-
-  if (text1.length() != text2.length())
-  {
-    return false;
-  }
-
-  for (size_t i = 0; i < text1.length(); i++)
-  {
-    if (tolower(text1[i]) != tolower(text2[i]))
-    {
-      return false;
-    }
-  }
-
   return true;
 }
 
-void geographyQuiz(vector<string> &questions,
-                   vector<string> &answers)
+void geographyQuiz(vector<pair<string, string>>& quiz)
 {
+  quiz.clear();
 
-  questions.clear();
-  answers.clear();
-
-  questions.push_back("What is the capital of Germany?");
-  answers.push_back("Berlin");
-
-  questions.push_back("Which is the longest river in the world?");
-  answers.push_back("Nile");
-
-  questions.push_back("Which continent is the Sahara Desert located on?");
-  answers.push_back("Africa");
-
-  questions.push_back("What is the largest country by area?");
-  answers.push_back("Russia");
-
-  questions.push_back("Which ocean lies between Africa and Australia?");
-  answers.push_back("Indian Ocean");
+  quiz.push_back({"What is the capital of Germany?", "Berlin"});
+  quiz.push_back({"Which is the longest river in the world?", "Nile"});
+  quiz.push_back({"Which continent is the Sahara Desert located on?", "Africa"});
+  quiz.push_back({"What is the largest country by area?", "Russia"});
+  quiz.push_back({"Which ocean lies between Africa and Australia?", "Indian Ocean"});
+  
 }
 
-void historyQuiz(vector<string> &questions,
-                 vector<string> &answers)
+void historyQuiz(vector<pair<string, string>>& quiz)
 {
+  quiz.clear();
 
-  questions.clear();
-  answers.clear();
-
-  questions.push_back("Who was the first President of the United States?");
-  answers.push_back("George Washington");
-
-  questions.push_back("In which year did World War I begin?");
-  answers.push_back("1914");
-
-  questions.push_back("Which empire was ruled by Julius Caesar?");
-  answers.push_back("Roman Empire");
-
-  questions.push_back("What wall fell in 1989 symbolizing the end of the Cold War?");
-  answers.push_back("Berlin Wall");
-
-  questions.push_back("Who was the leader of Nazi Germany during World War II?");
-  answers.push_back("Adolf Hitler");
+  quiz.push_back({"Who was the first President of the United States?", "George Washington"});
+  quiz.push_back({"In which year did World War I begin?", "1914"});
+  quiz.push_back({"Which empire was ruled by Julius Caesar?", "Roman Empire"});
+  quiz.push_back({"What wall fell in 1989 symbolizing the end of the Cold War?", "Berlin Wall"});
+  quiz.push_back({"Who was the leader of Nazi Germany during World War II?", "Adolf Hitler"});
 }
 
-void programmingQuiz(vector<string> &questions,
-                     vector<string> &answers)
+void programmingQuiz(vector<pair<string, string>>& quiz)
 {
-  questions.clear();
-  answers.clear();
+  quiz.clear();
 
-  questions.push_back("What does CPU stand for?");
-  answers.push_back("Central Processing Unit");
-
-  questions.push_back("Which keyword is used to define a constant in C++?");
-  answers.push_back("const");
-
-  questions.push_back("What data structure works on FIFO principle?");
-  answers.push_back("Queue");
-
-  questions.push_back("Which operator is used for comparison in C++?");
-  answers.push_back("==");
-
-  questions.push_back("What symbol is used for single line comments in C++?");
-  answers.push_back("//");
+  quiz.push_back({"What does CPU stand for?", "Central Processing Unit"});
+  quiz.push_back({"Which keyword is used to define a constant in C++?", "const"});
+  quiz.push_back({"What data structure works on FIFO principle?", "Queue"});
+  quiz.push_back({"Which operator is used for comparison in C++?", "=="});
+  quiz.push_back({"What symbol is used for single line comments in C++?", "//"});
 }
 
-void generalQuiz(vector<string> &questions,
-                 vector<string> &answers)
+void generalQuiz(vector<pair<string, string>>& quiz)
 {
+  quiz.clear();
 
-  questions.clear();
-  answers.clear();
-
-  questions.push_back("What is the capital of Canada?");
-  answers.push_back("Ottawa");
-
-  questions.push_back("Which planet is known as the Red Planet?");
-  answers.push_back("Mars");
-
-  questions.push_back("What is the largest ocean on Earth?");
-  answers.push_back("Pacific");
-
-  questions.push_back("In which year did World War II end?");
-  answers.push_back("1945");
-
-  questions.push_back("Which country is famous for inventing pizza?");
-  answers.push_back("Italy");
+  quiz.push_back({"What is the capital of Canada?", "Ottawa"});
+  quiz.push_back({"Which planet is known as the Red Planet?", "Mars"});
+  quiz.push_back({"What is the largest ocean on Earth?", "Pacific"});
+  quiz.push_back({"In which year did World War II end?", "1945"});
+  quiz.push_back({"Which country is famous for inventing pizza?", "Italy"});
 }
+
 
 int main()
 {
 
-  vector<string> questions;
-  vector<string> answers;
+  srand(time(0));
+
+  vector<pair<string, string>> quiz;
 
   int score = 0;
   int choice = 0;
 
-  while (choice != 4)
+
+  while (choice != 5)
   {
 
     cout << "======WELCOME TO QUIZ!======" << endl;
@@ -176,26 +122,24 @@ int main()
     switch (choice)
     {
     case 1:
-      geographyQuiz(questions, answers);
+      geographyQuiz(quiz);
       break;
 
     case 2:
-      historyQuiz(questions, answers);
+      historyQuiz(quiz);
       break;
 
     case 3:
-      programmingQuiz(questions, answers);
+      programmingQuiz(quiz);
       break;
 
     case 4:
-      generalQuiz(questions, answers);
+      generalQuiz(quiz);
       break;
 
     case 5:
      {
-      bool exitMenu = false;
-      exitMenu = true;
-      break;
+      break; 
      }
 
     default:
@@ -203,23 +147,28 @@ int main()
       continue;
     }
 
-    for (int i = 0; i < questions.size() - 1; i++)
+    for (int k = 0; k < quiz.size(); k++) {
+      int r = rand() % quiz.size();
+      swap(quiz[k], quiz[r]);
+    }
+
+    for (int i = 0; i < quiz.size(); i++)
     {
 
-      cout << questions[i] << "\n> ";
+      cout << quiz[i].first << "\n> ";
       string userAnswer;
       getline(cin, userAnswer);
 
-      if (sensitiveStrings(userAnswer, answers[i]))
+      if (sensitiveStrings(userAnswer, quiz[i].second))
       {
         score++;
         cout << "Correct answer!" << endl;
-        cout << "Final score: " << score << "/" << questions.size() << flush;
+        cout << "Final score: " << score << "/" << quiz.size() << flush;
       }
       else
       {
         cout << "Incorrect answer!" << endl;
-        cout << "Final score: " << score << "/" << questions.size() << flush;
+        cout << "Final score: " << score << "/" << quiz.size() << flush;
       }
 
       cout << endl;
