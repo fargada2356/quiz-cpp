@@ -7,8 +7,6 @@
 
 using namespace std;
 
-
-
 bool sensitiveStrings(const string &text1,
                       const string &text2)
 {
@@ -45,7 +43,7 @@ bool sensitiveStrings(const string &text1,
     j++;
   }
 
-  return true;
+  return j == text2.length();
 }
 
 void geographyQuiz(vector<pair<string, string>>& quiz)
@@ -101,12 +99,11 @@ int main()
 
   vector<pair<string, string>> quiz;
 
-  int score = 0;
   int choice = 0;
-
 
   while (choice != 5)
   {
+    int score = 0;
 
     cout << "======WELCOME TO QUIZ!======" << endl;
 
@@ -142,10 +139,13 @@ int main()
       break; 
      }
 
-    default:
-      cout << "Invalid choice! Try different option.\n";
+      default:
+      cout << "Invalid choice! Try to enter a number instead.\n";
       continue;
+
     }
+
+   
 
     for (int k = 0; k < quiz.size(); k++) {
       int r = rand() % quiz.size();
@@ -155,7 +155,7 @@ int main()
     for (int i = 0; i < quiz.size(); i++)
     {
 
-      cout << quiz[i].first << "\n> ";
+      cout << quiz[i].first << "\nAnswer: ";
       string userAnswer;
       getline(cin, userAnswer);
 
@@ -163,16 +163,20 @@ int main()
       {
         score++;
         cout << "Correct answer!" << endl;
-        cout << "Final score: " << score << "/" << quiz.size() << flush;
+        cout << "Score: " << score << "/" << quiz.size() << flush;
       }
+
       else
       {
         cout << "Incorrect answer!" << endl;
-        cout << "Final score: " << score << "/" << quiz.size() << flush;
+        cout << "Score: " << score << "/" << quiz.size() << flush;
       }
 
       cout << endl;
     }
+
+    cout << "Final Score: " << score << "/" << quiz.size() << endl;
+
   }
   return 0;
 }
