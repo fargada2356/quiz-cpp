@@ -46,7 +46,7 @@ bool sensitiveStrings(const string &text1,
   return j == text2.length();
 }
 
-void geographyQuiz(vector<pair<string, string>>& quiz)
+void geographyQuiz(vector<pair<string, string>> &quiz)
 {
   quiz.clear();
 
@@ -55,10 +55,9 @@ void geographyQuiz(vector<pair<string, string>>& quiz)
   quiz.push_back({"Which continent is the Sahara Desert located on?", "Africa"});
   quiz.push_back({"What is the largest country by area?", "Russia"});
   quiz.push_back({"Which ocean lies between Africa and Australia?", "Indian Ocean"});
-  
 }
 
-void historyQuiz(vector<pair<string, string>>& quiz)
+void historyQuiz(vector<pair<string, string>> &quiz)
 {
   quiz.clear();
 
@@ -69,7 +68,7 @@ void historyQuiz(vector<pair<string, string>>& quiz)
   quiz.push_back({"Who was the leader of Nazi Germany during World War II?", "Adolf Hitler"});
 }
 
-void programmingQuiz(vector<pair<string, string>>& quiz)
+void programmingQuiz(vector<pair<string, string>> &quiz)
 {
   quiz.clear();
 
@@ -80,7 +79,7 @@ void programmingQuiz(vector<pair<string, string>>& quiz)
   quiz.push_back({"What symbol is used for single line comments in C++?", "//"});
 }
 
-void generalQuiz(vector<pair<string, string>>& quiz)
+void generalQuiz(vector<pair<string, string>> &quiz)
 {
   quiz.clear();
 
@@ -91,6 +90,102 @@ void generalQuiz(vector<pair<string, string>>& quiz)
   quiz.push_back({"Which country is famous for inventing pizza?", "Italy"});
 }
 
+int showMenu()
+{
+
+  int choice = 0;
+
+  cout << "======WELCOME TO QUIZ!======" << endl;
+
+  cout << "1. Geography\n";
+  cout << "2. History\n";
+  cout << "3. Programming\n";
+  cout << "4. General Quiz\n";
+  cout << "5. Exit\n";
+  cout << "Choose a category!\n";
+  cin >> choice;
+  cin.ignore();
+
+  return choice;
+}
+
+void getChoice(int choice, vector<pair<string, string>> &quiz)
+{
+
+  switch (choice)
+  {
+  case 1:
+    geographyQuiz(quiz);
+    break;
+
+  case 2:
+    historyQuiz(quiz);
+    break;
+
+  case 3:
+    programmingQuiz(quiz);
+    break;
+
+  case 4:
+    generalQuiz(quiz);
+    break;
+
+  case 5:
+    cout << "Exiting...\n";
+    break;
+
+  default:
+    cout << "Invalid choice! Try to enter a number instead.\n";
+    break;
+  }
+}
+
+void shuffleQuestions(vector<pair<string, string>>& quiz)
+{
+
+  for (int k = 0; k < quiz.size(); k++)
+  {
+    int r = rand() % quiz.size();
+    swap(quiz[k], quiz[r]);
+  }
+}
+
+void loadQuiz(vector<pair<string, string>>& quiz,  int& score)
+{
+
+  shuffleQuestions(quiz);
+
+  for (int i = 0; i < quiz.size(); i++)
+  {
+
+    cout << quiz[i].first << "\nAnswer: ";
+    string userAnswer;
+    getline(cin, userAnswer);
+
+    if (sensitiveStrings(userAnswer, quiz[i].second))
+    {
+      score++;
+      cout << "Correct answer!" << endl;
+      cout << "Score: " << score << "/" << quiz.size() << flush;
+    }
+
+    else
+    {
+      cout << "Incorrect answer!" << endl;
+      cout << "Score: " << score << "/" << quiz.size() << flush;
+    }
+
+    cout << endl;
+  }
+}
+
+void finalScorePrint(vector<pair<string, string>>& quiz, int& score)
+{
+
+  showMenu();
+
+  cout << "Final Score: " << score << "/" << quiz.size() << endl;
+}
 
 int main()
 {
@@ -98,85 +193,30 @@ int main()
   srand(time(0));
 
   vector<pair<string, string>> quiz;
-
   int choice = 0;
 
   while (choice != 5)
   {
-    int score = 0;
 
-    cout << "======WELCOME TO QUIZ!======" << endl;
+    choice = showMenu();
 
-    cout << "1. Geography\n";
-    cout << "2. History\n";
-    cout << "3. Programming\n";
-    cout << "4. General Quiz\n";
-    cout << "5. Exit\n";
-    cout << "Choose a category!\n";
-    cin >> choice;
-    cin.ignore();
-
-    switch (choice)
+    if (choice == 5)
     {
-    case 1:
-      geographyQuiz(quiz);
       break;
+    }
 
-    case 2:
-      historyQuiz(quiz);
-      break;
+    getChoice(choice, quiz);
 
-    case 3:
-      programmingQuiz(quiz);
-      break;
-
-    case 4:
-      generalQuiz(quiz);
-      break;
-
-    case 5:
-     {
-      break; 
-     }
-
-      default:
-      cout << "Invalid choice! Try to enter a number instead.\n";
+    if (quiz.empty()) {
       continue;
-
     }
 
-   
+    int score = 0;
+    loadQuiz(quiz, score);
 
-    for (int k = 0; k < quiz.size(); k++) {
-      int r = rand() % quiz.size();
-      swap(quiz[k], quiz[r]);
-    }
-
-    for (int i = 0; i < quiz.size(); i++)
-    {
-
-      cout << quiz[i].first << "\nAnswer: ";
-      string userAnswer;
-      getline(cin, userAnswer);
-
-      if (sensitiveStrings(userAnswer, quiz[i].second))
-      {
-        score++;
-        cout << "Correct answer!" << endl;
-        cout << "Score: " << score << "/" << quiz.size() << flush;
-      }
-
-      else
-      {
-        cout << "Incorrect answer!" << endl;
-        cout << "Score: " << score << "/" << quiz.size() << flush;
-      }
-
-      cout << endl;
-    }
-
-    cout << "Final Score: " << score << "/" << quiz.size() << endl;
+    cout << "\n";
 
   }
+
   return 0;
 }
