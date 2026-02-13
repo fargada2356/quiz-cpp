@@ -3,3 +3,13 @@ Which keyword is used to define a constant in C++?|const
 What data structure works on FIFO principle?|Queue
 Which operator is used for comparison in C++?|==
 What symbol is used for single line comments in C++?|//
+What is the average time complexity of quicksort?|O(n log n)
+What keyword enables move semantics in C++?|&&
+What principle ties resource lifetime to object lifetime?|RAII
+What data structure uses LIFO order?|Stack
+What is the size of int in C++ (typical modern systems)?|4 bytes
+What is it called when a function calls itself?|Recursion
+What is the complexity of binary search?|O(log n)
+What keyword prevents further inheritance?|final
+What operator is used to allocate dynamic memory in C++?|new
+What is accessing memory outside array bounds called?|UB

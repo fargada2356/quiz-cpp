@@ -3,3 +3,12 @@ Which is the longest river in the world?|Nile
 Which continent is the Sahara Desert located on?|Africa
 What is the largest country by area?|Russia
 Which ocean lies between Africa and Australia?|Indian Ocean
+What is the longest river in South America?|Amazon
+What is the capital of Canada?|Ottawa
+What mountain range separates Europe and Asia?|Ural
+What is the largest ocean?|Pacific
+What desert is the largest hot desert?|Sahara
+What country controls the Bosporus Strait?|Turkey
+What is the capital of Japan?|Tokyo
+What is the deepest ocean point?|Challenger Deep
+What continent is Egypt primarily located in?|Africa

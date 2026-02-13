@@ -1,5 +1,15 @@
 What is the capital of Canada?|Ottawa
 Which planet is known as the Red Planet?|Mars
-What is the largest ocean on Earth?|Pacific
+What is the largest ocean on Earth?|Pacific Ocean
 In which year did World War II end?|1945
 Which country is famous for inventing pizza?|Italy
+What particle carries electromagnetic force?|Photon
+What is the hardest natural substance?|Diamond
+What is the chemical symbol for gold?|Au
+How many bones are in the adult human body?|206
+What galaxy do we live in?|Milky Way
+What is the speed of light (approx)?|300,000 km/s
+What gas do humans need to breathe?|Oxygen
+What is H2O commonly known as?|Water
+What is the smallest prime number?|2
+What instrument measures atmospheric pressure?|Barometer
