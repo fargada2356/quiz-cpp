@@ -1,0 +1,5 @@
+What does CPU stand for?|Central Processing Unit
+Which keyword is used to define a constant in C++?|const
+What data structure works on FIFO principle?|Queue
+Which operator is used for comparison in C++?|==
+What symbol is used for single line comments in C++?|//

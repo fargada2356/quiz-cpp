@@ -1,0 +1,5 @@
+What is the capital of Germany?|Berlin
+Which is the longest river in the world?|Nile
+Which continent is the Sahara Desert located on?|Africa
+What is the largest country by area?|Russia
+Which ocean lies between Africa and Australia?|Indian Ocean

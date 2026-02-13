@@ -4,6 +4,8 @@
 #include <cctype>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -50,44 +52,91 @@ void geographyQuiz(vector<pair<string, string>> &quiz)
 {
   quiz.clear();
 
-  quiz.push_back({"What is the capital of Germany?", "Berlin"});
-  quiz.push_back({"Which is the longest river in the world?", "Nile"});
-  quiz.push_back({"Which continent is the Sahara Desert located on?", "Africa"});
-  quiz.push_back({"What is the largest country by area?", "Russia"});
-  quiz.push_back({"Which ocean lies between Africa and Australia?", "Indian Ocean"});
+  ifstream file("QuizQuestions/geography.txt");
+
+  if (!file) {
+    cout << "Error opening the file!\n";
+    return;
+  }
+
+  string questions;
+  string answers;
+
+  while(getline(file, questions, '|') &&
+        getline(file, answers)) {
+          quiz.push_back({questions, answers});
+        }
+
+  file.close();
 }
 
 void historyQuiz(vector<pair<string, string>> &quiz)
 {
   quiz.clear();
 
-  quiz.push_back({"Who was the first President of the United States?", "George Washington"});
-  quiz.push_back({"In which year did World War I begin?", "1914"});
-  quiz.push_back({"Which empire was ruled by Julius Caesar?", "Roman Empire"});
-  quiz.push_back({"What wall fell in 1989 symbolizing the end of the Cold War?", "Berlin Wall"});
-  quiz.push_back({"Who was the leader of Nazi Germany during World War II?", "Adolf Hitler"});
+  ifstream file("QuizQuestions/history.txt");
+
+  if (!file) {
+    cout << "Error opening the file!\n";
+    return;
+  }
+
+  string questions;
+  string answers;
+
+  while(getline(file, questions, '|') &&
+        getline(file, answers)) {
+          quiz.push_back({questions, answers});
+        }
+
+  file.close();
 }
 
 void programmingQuiz(vector<pair<string, string>> &quiz)
 {
   quiz.clear();
 
-  quiz.push_back({"What does CPU stand for?", "Central Processing Unit"});
-  quiz.push_back({"Which keyword is used to define a constant in C++?", "const"});
-  quiz.push_back({"What data structure works on FIFO principle?", "Queue"});
-  quiz.push_back({"Which operator is used for comparison in C++?", "=="});
-  quiz.push_back({"What symbol is used for single line comments in C++?", "//"});
+
+   ifstream file("QuizQuestions/programming.txt");
+
+  if (!file) {
+    cout << "Error opening the file!\n";
+    return;
+  }
+
+  string questions;
+  string answers;
+
+  while(getline(file, questions, '|') &&
+        getline(file, answers)) {
+          quiz.push_back({questions, answers});
+        }
+
+  file.close();
 }
 
 void generalQuiz(vector<pair<string, string>> &quiz)
 {
+  
   quiz.clear();
 
-  quiz.push_back({"What is the capital of Canada?", "Ottawa"});
-  quiz.push_back({"Which planet is known as the Red Planet?", "Mars"});
-  quiz.push_back({"What is the largest ocean on Earth?", "Pacific"});
-  quiz.push_back({"In which year did World War II end?", "1945"});
-  quiz.push_back({"Which country is famous for inventing pizza?", "Italy"});
+  ifstream file("QuizQuestions/general.txt");
+
+  if (!file) {
+    cout << "Error opening the file!\n";
+    return;
+  }
+  
+  string question;
+  string answer;
+
+  while(getline(file, question, '|') &&
+        getline(file, answer))
+        {
+          quiz.push_back({question, answer});
+        }
+
+  file.close();
 }
 
 int showMenu()
@@ -155,7 +204,7 @@ void loadQuiz(vector<pair<string, string>>& quiz,  int& score)
 
   shuffleQuestions(quiz);
 
-  for (int i = 0; i < quiz.size(); i++)
+  for (size_t i = 0; i < quiz.size(); i++)
   {
 
     cout << quiz[i].first << "\nAnswer: ";
@@ -181,19 +230,76 @@ void loadQuiz(vector<pair<string, string>>& quiz,  int& score)
 
 void finalScorePrint(vector<pair<string, string>>& quiz, int& score)
 {
-
-  showMenu();
-
   cout << "Final Score: " << score << "/" << quiz.size() << endl;
+}
+
+void previousScores() {
+
+  ifstream file("playerScores/scores.txt");
+  int previousScore;
+  while (file >> previousScore) {
+    cout << "Previous Score: " << previousScore << endl;
+  }
+
+  file.close();
+}
+
+void loadScores(string playerName, int score, int total) {
+
+  vector<string> allLines;
+  bool playerFound = false;
+
+  ifstream inFile("playerScores/scores.txt");
+  string name;
+  int oldScore, oldTotal;
+
+  while(getline(inFile, name, ',')) {
+    inFile >> oldScore;
+    inFile.ignore();
+    inFile >> oldTotal;
+    inFile.ignore();
+
+    if(name == playerName) {
+      playerFound = true;
+      oldScore = oldScore + score;
+      oldTotal = oldTotal + total;
+    }
+
+    stringstream ss;
+    ss << name << "," << oldScore << "," << oldTotal;
+    allLines.push_back(ss.str());
+  }
+  inFile.close();
+
+  if(!playerFound) {
+    stringstream ss;
+    ss << playerName << "," << score << "," << total;
+    allLines.push_back(ss.str());
+  }
+
+  ofstream outFile("playerScores/scores.txt");
+  for(int i = 0; i < allLines.size(); i++) {
+    outFile << allLines[i] << endl;
+  }
+  outFile.close();
 }
 
 int main()
 {
 
+
+
   srand(time(0));
 
   vector<pair<string, string>> quiz;
+
   int choice = 0;
+
+  string playerName;
+  cout << "Enter your name :";
+  getline(cin, playerName);
+  cout << "Welcome, " << playerName << "!\n\n";
+
 
   while (choice != 5)
   {
@@ -213,6 +319,8 @@ int main()
 
     int score = 0;
     loadQuiz(quiz, score);
+
+    loadScores(playerName, score, quiz.size());
 
     cout << "\n";
 
