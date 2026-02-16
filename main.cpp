@@ -6,6 +6,7 @@
 #include <ctime>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -150,7 +151,8 @@ int showMenu()
   cout << "2. History\n";
   cout << "3. Programming\n";
   cout << "4. General Quiz\n";
-  cout << "5. Exit\n";
+  cout << "5. Leaderboard\n";
+  cout << "6. Exit\n";
   cout << "Choose a category!\n";
   cin >> choice;
   cin.ignore();
@@ -158,7 +160,45 @@ int showMenu()
   return choice;
 }
 
-void getChoice(int choice, vector<pair<string, string>> &quiz)
+void leaderboard(vector<pair<string, int>>& leaderScore) {
+
+  leaderScore.clear();
+ 
+  ifstream file("playerScores/scores.txt");
+
+  if (!file) {
+    cout << "Error opening scores file!\n";
+    return;
+  }
+
+  string name;
+  int oldScore, oldTotal;
+
+  while(getline(file, name, ',')) {
+    file >> oldScore;
+    file.ignore();
+    file >> oldTotal;
+    file.ignore();
+
+    leaderScore.push_back({name, oldScore});
+  }
+  
+  file.close();
+
+  sort(leaderScore.begin(), leaderScore.end(), [](const pair<string, int> &a, const pair<string, int>&b) {
+    return a.second > b.second;
+  });
+
+  cout << "\n===== LEADERBOARD =====\n";
+  for(int i = 0; i < leaderScore.size(); i++) {
+    cout << (i+1) << ". " << leaderScore[i].first << " - " << leaderScore[i].second << endl;
+  }
+  cout << "=======================\n\n";
+}
+
+void getChoice(int choice,
+              vector<pair<string, string>> &quiz,
+              vector<pair<string, int>> &leaderScore)
 {
 
   switch (choice)
@@ -180,6 +220,10 @@ void getChoice(int choice, vector<pair<string, string>> &quiz)
     break;
 
   case 5:
+     leaderboard(leaderScore);  
+     break; 
+
+  case 6:
     cout << "Exiting...\n";
     break;
 
@@ -277,6 +321,7 @@ void loadScores(string playerName, int score, int total) {
     allLines.push_back(ss.str());
   }
 
+
   ofstream outFile("playerScores/scores.txt");
   for(int i = 0; i < allLines.size(); i++) {
     outFile << allLines[i] << endl;
@@ -286,14 +331,12 @@ void loadScores(string playerName, int score, int total) {
 
 int main()
 {
-
-
-
   srand(time(0));
-
+  
   vector<pair<string, string>> quiz;
-
   int choice = 0;
+  vector<pair<string, int>>leaderScore;
+  
 
   string playerName;
   cout << "Enter your name :";
@@ -301,17 +344,16 @@ int main()
   cout << "Welcome, " << playerName << "!\n\n";
 
 
-  while (choice != 5)
+  while (choice != 6)
   {
-
     choice = showMenu();
-
-    if (choice == 5)
+    
+    if (choice == 6)
     {
-      break;
+      break;  
     }
-
-    getChoice(choice, quiz);
+    
+    getChoice(choice, quiz, leaderScore);
 
     if (quiz.empty()) {
       continue;
