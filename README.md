@@ -30,8 +30,6 @@ A simple console-based quiz application written in C++.
 
 ## Future Improvements
 
-- Randomized question order
 - Timer for each question
 - Difficulty levels
-- Save high scores
 - GUI version
