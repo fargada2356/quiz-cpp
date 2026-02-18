@@ -1,15 +1,15 @@
-What is the capital of Canada?|Ottawa
-Which planet is known as the Red Planet?|Mars
-What is the largest ocean on Earth?|Pacific Ocean
-In which year did World War II end?|1945
-Which country is famous for inventing pizza?|Italy
-What particle carries electromagnetic force?|Photon
-What is the hardest natural substance?|Diamond
-What is the chemical symbol for gold?|Au
-How many bones are in the adult human body?|206
-What galaxy do we live in?|Milky Way
-What is the speed of light (approx)?|300,000 km/s
-What gas do humans need to breathe?|Oxygen
-What is H2O commonly known as?|Water
-What is the smallest prime number?|2
-What instrument measures atmospheric pressure?|Barometer
+What is the capital of Canada?|Ottawa|Toronto|Vancouver|Montreal|A
+Which planet is known as the Red Planet?|Mars|Venus|Jupiter|Saturn|A
+What is the largest ocean on Earth?|Pacific Ocean|Atlantic Ocean|Indian Ocean|Arctic Ocean|A
+In which year did World War II end?|1945|1939|1918|1963|A
+Which country is famous for inventing pizza?|Italy|France|Spain|Greece|A
+What particle carries electromagnetic force?|Photon|Electron|Proton|Neutron|A
+What is the hardest natural substance?|Diamond|Gold|Iron|Quartz|A
+What is the chemical symbol for gold?|Au|Ag|Gd|Go|A
+How many bones are in the adult human body?|206|201|210|196|A
+What galaxy do we live in?|Milky Way|Andromeda|Whirlpool|Sombrero|A
+What is the speed of light (approx)?|300,000 km/s|150,000 km/s|1,000 km/s|30,000 km/s|A
+What gas do humans need to breathe?|Oxygen|Carbon Dioxide|Nitrogen|Hydrogen|A
+What is H2O commonly known as?|Water|Hydrogen|Ozone|Salt|A
+What is the smallest prime number?|2|1|3|0|A
+What instrument measures atmospheric pressure?|Barometer|Thermometer|Hygrometer|Altimeter|A

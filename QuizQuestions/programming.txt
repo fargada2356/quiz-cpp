@@ -1,15 +1,15 @@
-What does CPU stand for?|Central Processing Unit
-Which keyword is used to define a constant in C++?|const
-What data structure works on FIFO principle?|Queue
-Which operator is used for comparison in C++?|==
-What symbol is used for single line comments in C++?|//
-What is the average time complexity of quicksort?|O(n log n)
-What keyword enables move semantics in C++?|&&
-What principle ties resource lifetime to object lifetime?|RAII
-What data structure uses LIFO order?|Stack
-What is the size of int in C++ (typical modern systems)?|4 bytes
-What is it called when a function calls itself?|Recursion
-What is the complexity of binary search?|O(log n)
-What keyword prevents further inheritance?|final
-What operator is used to allocate dynamic memory in C++?|new
-What is accessing memory outside array bounds called?|UB
+What does CPU stand for?|Central Processing Unit|Computer Power Unit|Central Program Utility|Core Processing Utility|A
+Which keyword is used to define a constant in C++?|const|static|define|final|A
+What data structure works on FIFO principle?|Queue|Stack|Vector|Tree|A
+Which operator is used for comparison in C++?|==|=|!=|<=|A
+What symbol is used for single line comments in C++?|//|#|/*|--|A
+What is the average time complexity of quicksort?|O(n log n)|O(n^2)|O(log n)|O(n)|A
+What keyword enables move semantics in C++?|&&|&|move|auto|A
+What principle ties resource lifetime to object lifetime?|RAII|OOP|DRY|SOLID|A
+What data structure uses LIFO order?|Stack|Queue|List|Map|A
+What is the size of int in C++ (typical modern systems)?|4 bytes|2 bytes|8 bytes|1 byte|A
+What is it called when a function calls itself?|Recursion|Iteration|Looping|Branching|A
+What is the complexity of binary search?|O(log n)|O(n)|O(n log n)|O(1)|A
+What keyword prevents further inheritance?|final|static|private|sealed|A
+What operator is used to allocate dynamic memory in C++?|new|malloc|alloc|create|A
+What is accessing memory outside array bounds called?|UB|Overflow|Leak|Corruption|A

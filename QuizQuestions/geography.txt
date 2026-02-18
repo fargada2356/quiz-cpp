@@ -1,15 +1,15 @@
-What is the capital of Germany?|Berlin
-Which is the longest river in the world?|Nile
-Which continent is the Sahara Desert located on?|Africa
-What is the largest country by area?|Russia
-Which ocean lies between Africa and Australia?|Indian Ocean
-What is the longest river in South America?|Amazon
-What is the capital of Canada?|Ottawa
-What mountain range separates Europe and Asia?|Ural
-What is the largest ocean?|Pacific
-What desert is the largest hot desert?|Sahara
-What country controls the Bosporus Strait?|Turkey
-What is the capital of Japan?|Tokyo
-What is the deepest ocean point?|Challenger Deep
-What continent is Egypt primarily located in?|Africa
-Which continent holds the title for both the largest landmass and population?|Asia
+What is the capital of Germany?|Berlin|Paris|Sofia|London|A
+Which is the longest river in the world?|Nile|Amazon|Yangtze|Mississippi|A
+Which continent is the Sahara Desert located on?|Africa|Asia|Australia|Europe|A
+What is the largest country by area?|Russia|Canada|China|USA|A
+Which ocean lies between Africa and Australia?|Indian Ocean|Pacific Ocean|Atlantic Ocean|Arctic Ocean|A
+What is the longest river in South America?|Amazon|Parana|Orinoco|Mississippi|A
+What is the capital of Canada?|Ottawa|Toronto|Vancouver|Montreal|A
+What mountain range separates Europe and Asia?|Ural|Alps|Himalayas|Andes|A
+What is the largest ocean?|Pacific|Atlantic|Indian|Arctic|A
+What desert is the largest hot desert?|Sahara|Gobi|Kalahari|Arabian|A
+What country controls the Bosporus Strait?|Turkey|Greece|Russia|Italy|A
+What is the capital of Japan?|Tokyo|Kyoto|Osaka|Seoul|A
+What is the deepest ocean point?|Challenger Deep|Puerto Rico Trench|Java Trench|Tonga Trench|A
+What continent is Egypt primarily located in?|Africa|Asia|Europe|South America|A
+Which continent holds the title for both the largest landmass and population?|Asia|Africa|Europe|North America|A

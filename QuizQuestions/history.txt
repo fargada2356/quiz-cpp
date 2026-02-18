@@ -1,15 +1,15 @@
-Who was the first President of the United States?|George Washington
-In which year did World War I begin?|1914
-Which empire was ruled by Julius Caesar?|Roman Empire
-What wall fell in 1989 symbolizing the end of the Cold War?|Berlin Wall
-Who was the leader of Nazi Germany during World War II?|Adolf Hitler
-In which year did World War II end?|1945
-Who was the first Roman emperor?|Augustus
-What empire fell in 1453?|Byzantine
-Who led the Mongol Empire at its height?|Genghis Khan
-What document was signed in 1215 in England?|Magna Carta
-Which revolution began in 1789?|French Revolution
-Who was the U.S. president during the Civil War?|Lincoln
-Which ancient civilization built Machu Picchu?|Inca
-What wall fell in 1989?|Berlin Wall
-Which city was buried by Vesuvius in 79 AD?|Pompeii
+Who was the first President of the United States?|George Washington|Abraham Lincoln|Thomas Jefferson|John Adams|A
+In which year did World War I begin?|1914|1918|1939|1905|A
+Which empire was ruled by Julius Caesar?|Roman Empire|Ottoman Empire|British Empire|Persian Empire|A
+What wall fell in 1989 symbolizing the end of the Cold War?|Berlin Wall|Great Wall|Hadrian's Wall|Wailing Wall|A
+Who was the leader of Nazi Germany during World War II?|Adolf Hitler|Stalin|Mussolini|Churchill|A
+In which year did World War II end?|1945|1942|1950|1936|A
+Who was the first Roman emperor?|Augustus|Nero|Trajan|Constantine|A
+What empire fell in 1453?|Byzantine|Roman|Ottoman|Mongol|A
+Who led the Mongol Empire at its height?|Genghis Khan|Kublai Khan|Attila|Tamerlane|A
+What document was signed in 1215 in England?|Magna Carta|Bill of Rights|Declaration|Treaty of Paris|A
+Which revolution began in 1789?|French Revolution|Russian Revolution|American Revolution|Industrial Revolution|A
+Who was the U.S. president during the Civil War?|Lincoln|Grant|Roosevelt|Wilson|A
+Which ancient civilization built Machu Picchu?|Inca|Maya|Aztec|Olmec|A
+What wall fell in 1989?|Berlin Wall|Iron Curtain|Great Wall|Western Wall|A
+Which city was buried by Vesuvius in 79 AD?|Pompeii|Athens|Rome|Sparta|A
