@@ -374,6 +374,35 @@ void finalScorePrint(vector<pair<string, string>> &quiz, int &score)
   cout << "Final Score: " << score << "/" << quiz.size() << endl;
 }
 
+void showStatistics (int score, int total) {
+
+  double accuracy = (score * 100.0) / total;
+
+  cout << "Score: " << score << "/" << total << endl;
+  cout << "Accuracy: " << accuracy << "%\n";
+
+  if (accuracy >= 90) {
+    cout << "Excellent work!\n";
+  }
+
+  else if (accuracy >= 80) {
+    cout << "Good!\n";
+  }
+  
+  else if (accuracy >= 50) {
+    cout << "Well done!\n";
+  }
+
+  else if (accuracy >= 30) {
+    cout << "Poor!\n";
+  }
+
+  else if (accuracy >= 10) {
+    cout << "Really bad performance..\n";
+  }
+
+}
+
 void previousScores()
 {
 
@@ -463,6 +492,7 @@ int main()
 
     int score = 0;
     loadQuiz(quiz, score);
+    showStatistics(score, quiz.size());
 
     loadScores(playerName, score, quiz.size());
 
