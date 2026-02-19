@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include "quiz.h"
 
 using namespace std;
 
@@ -111,7 +112,6 @@ void historyQuiz(vector<pair<string, string>> &quiz)
     string fullQuestion = question + "~" + optionA + "~" + optionB + "~" + optionC + "~" + optionD;
     string answer(1, correctAnswer);
     quiz.push_back({fullQuestion, answer});
-
   }
 
   file.close();
@@ -145,12 +145,8 @@ void programmingQuiz(vector<pair<string, string>> &quiz)
     string fullQuestion = question + "~" + optionA + "~" + optionB + "~" + optionC + "~" + optionD;
     string answer(1, correctAnswer);
     quiz.push_back({fullQuestion, answer});
-
   }
   file.close();
-
-
-
 }
 
 void generalQuiz(vector<pair<string, string>> &quiz)
@@ -184,42 +180,43 @@ void generalQuiz(vector<pair<string, string>> &quiz)
     quiz.push_back({fullQuestion, answer});
   }
   file.close();
-
 }
 
 int showMenu()
 {
   int choice = 0;
 
-  while(true) {
-  cout << "======WELCOME TO QUIZ!======" << endl;
-  cout << "1. Geography\n";
-  cout << "2. History\n";
-  cout << "3. Programming\n";
-  cout << "4. General Quiz\n";
-  cout << "5. Leaderboard\n";
-  cout << "6. Exit\n";
-  cout << "Choose a category!\n";
-  cin >> choice;
+  while (true)
+  {
+    cout << "======WELCOME TO QUIZ!======" << endl;
+    cout << "1. Geography\n";
+    cout << "2. History\n";
+    cout << "3. Programming\n";
+    cout << "4. General Quiz\n";
+    cout << "5. Random Mix of Quizzes\n";
+    cout << "6. Leaderboard\n";
+    cout << "7. Exit\n";
+    cout << "Choose a category!\n";
+    cin >> choice;
 
-  if(cin.fail()) {
-    cin.clear();
+    if (cin.fail())
+    {
+      cin.clear();
+      cin.ignore(10000, '\n');
+      cout << "Invalid! Enter a number.\n\n";
+      continue;
+    }
+
     cin.ignore(10000, '\n');
-    cout << "Invalid! Enter a number.\n\n";
-    continue;
+
+    if (choice < 1 || choice > 6)
+    {
+      cout << "Invalid! Enter 1-6.\n\n";
+      continue;
+    }
+
+    return choice;
   }
-
-  cin.ignore(10000, '\n');
-
-  if (choice < 1 || choice > 6) {
-    cout << "Invalid! Enter 1-6.\n\n";
-    continue;
-  }
-
-  return choice;
-
-}
-  
 }
 
 void leaderboard(vector<pair<string, int>> &leaderScore)
@@ -253,11 +250,23 @@ void leaderboard(vector<pair<string, int>> &leaderScore)
   sort(leaderScore.begin(), leaderScore.end(), [](const pair<string, int> &a, const pair<string, int> &b)
        { return a.second > b.second; });
 
-  cout << "\n===== LEADERBOARD =====\n";
-  for (int i = 0; i < leaderScore.size(); i++)
+  cout << "\n===== TOP 5 LEADERBOARD =====\n";
+  int limit;
+  if (leaderScore.size() < 5)
+  {
+    limit = leaderScore.size();
+  }
+
+  else
+  {
+    limit = 5;
+  }
+
+  for (int i = 0; i < limit; i++)
   {
     cout << (i + 1) << ". " << leaderScore[i].first << " - " << leaderScore[i].second << endl;
   }
+
   cout << "=======================\n\n";
 }
 
@@ -285,10 +294,14 @@ void getChoice(int choice,
     break;
 
   case 5:
-    leaderboard(leaderScore);
+    randomMixQuiz(quiz);
     break;
 
   case 6:
+    leaderboard(leaderScore);
+    break;  
+
+  case 7:
     cout << "Exiting...\n";
     break;
 
@@ -349,7 +362,8 @@ void loadQuiz(vector<pair<string, string>> &quiz, int &score,
     string input;
     cin >> input;
 
-    if(input.length() != 1) {
+    if (input.length() != 1)
+    {
       cout << "Invalid input! Please enter A, B, C, or D.\n";
       i--;
       continue;
@@ -364,7 +378,8 @@ void loadQuiz(vector<pair<string, string>> &quiz, int &score,
       userChoice -= 32;
     }
 
-    if(userChoice != 'A' && userChoice != 'B' && userChoice != 'C' && userChoice != 'D') {
+    if (userChoice != 'A' && userChoice != 'B' && userChoice != 'C' && userChoice != 'D')
+    {
       cout << "Invalid choice! Please enter A, B, C or D.\n";
       i--;
       continue;
@@ -390,23 +405,25 @@ void loadQuiz(vector<pair<string, string>> &quiz, int &score,
     else if (userChoice == 'D')
       userPickedText = options[3];
 
-    if (userPickedText == correctAnswerText) {
+    if (userPickedText == correctAnswerText)
+    {
       score++;
       cout << "Correct!" << endl;
     }
 
-    else {
+    else
+    {
       cout << "Wrong! the answer was " << correctAnswerText << endl;
       wrongAnswers.push_back({question, correctAnswerText});
     }
-  
   }
-
 }
 
-void reviewWrongAnswers(vector<pair <string, string>> wrongAnswers) {
+void reviewWrongAnswers(vector<pair<string, string>> wrongAnswers)
+{
 
-  if (wrongAnswers.empty()) {
+  if (wrongAnswers.empty())
+  {
     cout << "You got all questions correct! No review needed.\n";
     return;
   }
@@ -416,19 +433,19 @@ void reviewWrongAnswers(vector<pair <string, string>> wrongAnswers) {
 
   int questionNum = 1;
 
-  for(auto x : wrongAnswers) {
+  for (auto x : wrongAnswers)
+  {
 
-   cout << questionNum << ". ";
-   cout << "Question: " << x.first << endl;
-   cout << "Correct answer was: " << x.second << endl;
-   cout << endl;
+    cout << questionNum << ". ";
+    cout << "Question: " << x.first << endl;
+    cout << "Correct answer was: " << x.second << endl;
+    cout << endl;
 
-   questionNum++;
-
+    questionNum++;
   }
 
-  cout << "================================\n" << endl;
-
+  cout << "================================\n"
+       << endl;
 }
 
 void finalScorePrint(vector<pair<string, string>> &quiz, int &score)
@@ -436,7 +453,8 @@ void finalScorePrint(vector<pair<string, string>> &quiz, int &score)
   cout << "Final Score: " << score << "/" << quiz.size() << endl;
 }
 
-void showStatistics (int score, int total, vector<pair <string,string>> wrongAnswers) {
+void showStatistics(int score, int total, vector<pair<string, string>> wrongAnswers)
+{
 
   double accuracy = (score * 100.0) / total;
 
@@ -445,38 +463,44 @@ void showStatistics (int score, int total, vector<pair <string,string>> wrongAns
   cout << "Score: " << score << "/" << total << endl;
   cout << "Accuracy: " << accuracy << "%\n";
 
-  if (accuracy >= 90) {
+  if (accuracy >= 90)
+  {
     cout << "Excellent work!\n";
   }
 
-  else if (accuracy >= 80) {
+  else if (accuracy >= 80)
+  {
     cout << "Good!\n";
   }
-  
-  else if (accuracy >= 50) {
+
+  else if (accuracy >= 50)
+  {
     cout << "Well done!\n";
   }
 
-  else if (accuracy >= 30) {
+  else if (accuracy >= 30)
+  {
     cout << "Poor!\n";
   }
 
-  else if (accuracy >= 10) {
+  else if (accuracy >= 10)
+  {
     cout << "Really bad performance..\n";
   }
 
   string answer;
 
-  if (!wrongAnswers.empty()) {
+  if (!wrongAnswers.empty())
+  {
     cout << "Would you like to review wrong answers? (y/n)\n";
     cin >> answer;
     cin.ignore(10000, '\n');
   }
 
-  if (answer == "y" || answer == "Y" || answer == "yes" || answer == "Yes" ) {
+  if (answer == "y" || answer == "Y" || answer == "yes" || answer == "Yes")
+  {
     reviewWrongAnswers(wrongAnswers);
   }
-
 }
 
 void previousScores()
@@ -537,6 +561,50 @@ void loadScores(string playerName, int score, int total)
   outFile.close();
 }
 
+void randomMixQuiz(vector<pair<string, string>>& quiz)
+{
+
+  quiz.clear();
+
+  vector<pair<string, string>> allQuestions;
+  vector<pair<string, string>> tempQuiz;
+
+  geographyQuiz(tempQuiz);
+  for (int i = 0; i < tempQuiz.size(); i++)
+  {
+    allQuestions.push_back(tempQuiz[i]);
+  }
+
+  historyQuiz(tempQuiz);
+  for (int i = 0; i < tempQuiz.size(); i++)
+  {
+    allQuestions.push_back(tempQuiz[i]);
+  }
+
+  programmingQuiz(tempQuiz);
+  for (int i = 0; i < tempQuiz.size(); i++)
+  {
+    allQuestions.push_back(tempQuiz[i]);
+  }
+
+  generalQuiz(tempQuiz);
+  for (int i = 0; i < tempQuiz.size(); i++)
+  {
+    allQuestions.push_back(tempQuiz[i]);
+  }
+
+  for (int k = 0; k < allQuestions.size(); k++)
+  {
+    int r = rand() % allQuestions.size();
+    swap(allQuestions[k], allQuestions[r]);
+  }
+
+  for (int i = 0; i < 15 && i < allQuestions.size(); i++)
+  {
+    quiz.push_back(allQuestions[i]);
+  }
+}
+
 int main()
 {
   srand(time(0));
@@ -550,29 +618,29 @@ int main()
   getline(cin, playerName);
   cout << "Welcome, " << playerName << "!\n\n";
 
-  while (choice != 6)
+  while (choice != 7)
   {
     choice = showMenu();
 
-    if (choice == 6)
+    if (choice == 7)
     {
       break;
     }
 
     getChoice(choice, quiz, leaderScore);
 
-    if (choice == 5 || choice == 6)
+    if (choice == 6 || choice == 7)
     {
       continue;
     }
 
-    if (quiz.empty()) {
+    if (quiz.empty())
+    {
       continue;
     }
 
-
     int score = 0;
-    vector<pair <string,string>> wrongAnswers;
+    vector<pair<string, string>> wrongAnswers;
     loadQuiz(quiz, score, wrongAnswers);
     showStatistics(score, quiz.size(), wrongAnswers);
 
