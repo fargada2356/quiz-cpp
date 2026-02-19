@@ -191,6 +191,7 @@ int showMenu()
 {
   int choice = 0;
 
+  while(true) {
   cout << "======WELCOME TO QUIZ!======" << endl;
   cout << "1. Geography\n";
   cout << "2. History\n";
@@ -200,9 +201,25 @@ int showMenu()
   cout << "6. Exit\n";
   cout << "Choose a category!\n";
   cin >> choice;
-  cin.ignore();
+
+  if(cin.fail()) {
+    cin.clear();
+    cin.ignore(10000, '\n');
+    cout << "Invalid! Enter a number.\n\n";
+    continue;
+  }
+
+  cin.ignore(10000, '\n');
+
+  if (choice < 1 || choice > 6) {
+    cout << "Invalid! Enter 1-6.\n\n";
+    continue;
+  }
 
   return choice;
+  
+}
+  
 }
 
 void leaderboard(vector<pair<string, int>> &leaderScore)
