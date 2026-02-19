@@ -1,4 +1,1 @@
-petyo,2,15
-Petyo,1,15
-Yordan,0,0
-yordan,3,15
+asd,0,32100

@@ -328,13 +328,28 @@ void loadQuiz(vector<pair<string, string>> &quiz, int &score)
     cout << "D) " << options[3] << endl;
 
     cout << "Your Answer (A/B/C/D): ";
-    char userChoice;
-    cin >> userChoice;
-    cin.ignore();
+    string input;
+    cin >> input;
+
+    if(input.length() != 1) {
+      cout << "Invalid input! Please enter A, B, C, or D.\n";
+      i--;
+      continue;
+    }
+
+    char userChoice = input[0];
+
+    cin.ignore(10000, '\n');
 
     if (userChoice >= 'a' && userChoice <= 'd')
     {
       userChoice -= 32;
+    }
+
+    if(userChoice != 'A' && userChoice != 'B' && userChoice != 'C' && userChoice != 'D') {
+      cout << "Invalid choice! Please enter A, B ,C or D.\n";
+      i--;
+      continue;
     }
 
     string correctAnswerText;
@@ -377,6 +392,8 @@ void finalScorePrint(vector<pair<string, string>> &quiz, int &score)
 void showStatistics (int score, int total) {
 
   double accuracy = (score * 100.0) / total;
+
+  cout << "===== YOUR STATS =====" << endl;
 
   cout << "Score: " << score << "/" << total << endl;
   cout << "Accuracy: " << accuracy << "%\n";
