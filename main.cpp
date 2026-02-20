@@ -501,6 +501,13 @@ void showStatistics(int score, int total, vector<pair<string, string>> wrongAnsw
   {
     reviewWrongAnswers(wrongAnswers);
   }
+
+  if (answer == "n" || answer == "N") {
+
+    cout << "Thank you for playing the quiz!\n";
+
+  }
+
 }
 
 void previousScores()
