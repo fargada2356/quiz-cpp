@@ -299,7 +299,7 @@ void getChoice(int choice,
 
   case 6:
     leaderboard(leaderScore);
-    break;  
+    break;
 
   case 7:
     cout << "Exiting...\n";
@@ -502,12 +502,11 @@ void showStatistics(int score, int total, vector<pair<string, string>> wrongAnsw
     reviewWrongAnswers(wrongAnswers);
   }
 
-  if (answer == "n" || answer == "N") {
+  if (answer == "n" || answer == "N")
+  {
 
     cout << "Thank you for playing the quiz!\n";
-
   }
-
 }
 
 void previousScores()
@@ -568,7 +567,7 @@ void loadScores(string playerName, int score, int total)
   outFile.close();
 }
 
-void randomMixQuiz(vector<pair<string, string>>& quiz)
+void randomMixQuiz(vector<pair<string, string>> &quiz)
 {
 
   quiz.clear();
