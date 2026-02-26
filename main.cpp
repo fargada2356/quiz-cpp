@@ -9,32 +9,29 @@
 #include <algorithm>
 #include "quiz.h"
 
-using namespace std;
-
-bool sensitiveStrings(const string &text1,
-                      const string &text2)
+bool sensitiveStrings(const std::string &text1,
+                      const std::string &text2)
 {
-
   int j = 0;
 
-  for (int i = 0; i < text1.length(); i++)
+  for (int i = 0; i < (int)text1.length(); i++)
   {
-    if (isspace(text1[i]))
+    if (std::isspace(text1[i]))
     {
       continue;
     }
 
-    while (j < text2.length() && isspace(text2[j]))
+    while (j < (int)text2.length() && std::isspace(text2[j]))
     {
       j++;
     }
 
-    if (j >= text2.length())
+    if (j >= (int)text2.length())
     {
       return false;
     }
 
-    if (tolower(text1[i]) != tolower(text2[j]))
+    if (std::tolower(text1[i]) != std::tolower(text2[j]))
     {
       return false;
     }
@@ -42,71 +39,35 @@ bool sensitiveStrings(const string &text1,
     j++;
   }
 
-  while (j < text2.length() && isspace(text2[j]))
+  while (j < (int)text2.length() && std::isspace(text2[j]))
   {
     j++;
   }
 
-  return j == text2.length();
+  return j == (int)text2.length();
 }
 
-
-
-void geographyQuiz(vector<Question>& quiz)
+void geographyQuiz(std::vector<Question>& quiz)
 {
   quiz.clear();
 
-  ifstream file("QuizQuestions/geography.txt");
+  std::ifstream file("QuizQuestions/geography.txt");
 
   if (!file)
   {
-    cout << "Error opening the file!\n";
+    std::cout << "Error opening the file!\n";
     return;
   }
 
-  string question, optionA, optionB, optionC, optionD;
+  std::string question, optionA, optionB, optionC, optionD;
   char correctAnswer;
 
-
-  while (getline(file, question, '|') &&
-         getline(file, optionA, '|') &&
-         getline(file, optionB, '|') &&
-         getline(file, optionC, '|') &&
-         getline(file, optionD, '|'))
+  while (std::getline(file, question, '|') &&
+         std::getline(file, optionA, '|') &&
+         std::getline(file, optionB, '|') &&
+         std::getline(file, optionC, '|') &&
+         std::getline(file, optionD, '|'))
   {
-
-    file >> correctAnswer;
-    file.ignore();
-
-    Question q(question, {optionA, optionB, optionC, optionD}, correctAnswer);
-    quiz.push_back(q);
-
-  }
-  file.close();
-}
-
-void historyQuiz(vector<Question>& quiz)
-{
-  quiz.clear();
-
-  ifstream file("QuizQuestions/history.txt");
-
-  if (!file)
-  {
-    cout << "Error opening the file!\n";
-    return;
-  }
-
-  string question, optionA, optionB, optionC, optionD;
-  char correctAnswer;
-
-  while (getline(file, question, '|') &&
-         getline(file, optionA, '|') &&
-         getline(file, optionB, '|') &&
-         getline(file, optionC, '|') &&
-         getline(file, optionD, '|'))
-  {
-
     file >> correctAnswer;
     file.ignore();
 
@@ -117,66 +78,96 @@ void historyQuiz(vector<Question>& quiz)
   file.close();
 }
 
-void programmingQuiz(vector<Question>& quiz)
+void historyQuiz(std::vector<Question>& quiz)
 {
   quiz.clear();
 
-  ifstream file("QuizQuestions/programming.txt");
+  std::ifstream file("QuizQuestions/history.txt");
 
   if (!file)
   {
-    cout << "Error opening the file!\n";
+    std::cout << "Error opening the file!\n";
     return;
   }
 
-  string question, optionA, optionB, optionC, optionD;
+  std::string question, optionA, optionB, optionC, optionD;
   char correctAnswer;
 
-  while (getline(file, question, '|') &&
-         getline(file, optionA, '|') &&
-         getline(file, optionB, '|') &&
-         getline(file, optionC, '|') &&
-         getline(file, optionD, '|'))
+  while (std::getline(file, question, '|') &&
+         std::getline(file, optionA, '|') &&
+         std::getline(file, optionB, '|') &&
+         std::getline(file, optionC, '|') &&
+         std::getline(file, optionD, '|'))
   {
-
     file >> correctAnswer;
     file.ignore();
 
     Question q(question, {optionA, optionB, optionC, optionD}, correctAnswer);
     quiz.push_back(q);
   }
+
   file.close();
 }
 
-void generalQuiz(vector<Question>& quiz)
+void programmingQuiz(std::vector<Question>& quiz)
 {
-
   quiz.clear();
 
-  ifstream file("QuizQuestions/general.txt");
+  std::ifstream file("QuizQuestions/programming.txt");
 
   if (!file)
   {
-    cout << "Error opening the file!\n";
+    std::cout << "Error opening the file!\n";
     return;
   }
 
-  string question, optionA, optionB, optionC, optionD;
+  std::string question, optionA, optionB, optionC, optionD;
   char correctAnswer;
 
-  while (getline(file, question, '|') &&
-         getline(file, optionA, '|') &&
-         getline(file, optionB, '|') &&
-         getline(file, optionC, '|') &&
-         getline(file, optionD, '|'))
+  while (std::getline(file, question, '|') &&
+         std::getline(file, optionA, '|') &&
+         std::getline(file, optionB, '|') &&
+         std::getline(file, optionC, '|') &&
+         std::getline(file, optionD, '|'))
   {
-
     file >> correctAnswer;
     file.ignore();
 
     Question q(question, {optionA, optionB, optionC, optionD}, correctAnswer);
     quiz.push_back(q);
   }
+
+  file.close();
+}
+
+void generalQuiz(std::vector<Question>& quiz)
+{
+  quiz.clear();
+
+  std::ifstream file("QuizQuestions/general.txt");
+
+  if (!file)
+  {
+    std::cout << "Error opening the file!\n";
+    return;
+  }
+
+  std::string question, optionA, optionB, optionC, optionD;
+  char correctAnswer;
+
+  while (std::getline(file, question, '|') &&
+         std::getline(file, optionA, '|') &&
+         std::getline(file, optionB, '|') &&
+         std::getline(file, optionC, '|') &&
+         std::getline(file, optionD, '|'))
+  {
+    file >> correctAnswer;
+    file.ignore();
+
+    Question q(question, {optionA, optionB, optionC, optionD}, correctAnswer);
+    quiz.push_back(q);
+  }
+
   file.close();
 }
 
@@ -186,30 +177,30 @@ int showMenu()
 
   while (true)
   {
-    cout << "======WELCOME TO QUIZ!======" << endl;
-    cout << "1. Geography\n";
-    cout << "2. History\n";
-    cout << "3. Programming\n";
-    cout << "4. General Quiz\n";
-    cout << "5. Random Mix of Quizzes\n";
-    cout << "6. Leaderboard\n";
-    cout << "7. Exit\n";
-    cout << "Choose a category!\n";
-    cin >> choice;
+    std::cout << "======WELCOME TO QUIZ!======" << std::endl;
+    std::cout << "1. Geography\n";
+    std::cout << "2. History\n";
+    std::cout << "3. Programming\n";
+    std::cout << "4. General Quiz\n";
+    std::cout << "5. Random Mix of Quizzes\n";
+    std::cout << "6. Leaderboard\n";
+    std::cout << "7. Exit\n";
+    std::cout << "Choose a category!\n";
+    std::cin >> choice;
 
-    if (cin.fail())
+    if (std::cin.fail())
     {
-      cin.clear();
-      cin.ignore(10000, '\n');
-      cout << "Invalid! Enter a number.\n\n";
+      std::cin.clear();
+      std::cin.ignore(10000, '\n');
+      std::cout << "Invalid! Enter a number.\n\n";
       continue;
     }
 
-    cin.ignore(10000, '\n');
+    std::cin.ignore(10000, '\n');
 
     if (choice < 1 || choice > 7)
     {
-      cout << "Invalid! Enter 1-7.\n\n";
+      std::cout << "Invalid! Enter 1-7.\n\n";
       continue;
     }
 
@@ -217,23 +208,22 @@ int showMenu()
   }
 }
 
-void leaderboard(vector<pair<string, int>> &leaderScore)
+void leaderboard(std::vector<std::pair<std::string, int>> &leaderScore)
 {
-
   leaderScore.clear();
 
-  ifstream file("playerScores/scores.txt");
+  std::ifstream file("playerScores/scores.txt");
 
   if (!file)
   {
-    cout << "Error opening scores file!\n";
+    std::cout << "Error opening scores file!\n";
     return;
   }
 
-  string name;
+  std::string name;
   int oldScore, oldTotal;
 
-  while (getline(file, name, ','))
+  while (std::getline(file, name, ','))
   {
     file >> oldScore;
     file.ignore();
@@ -245,16 +235,16 @@ void leaderboard(vector<pair<string, int>> &leaderScore)
 
   file.close();
 
-  sort(leaderScore.begin(), leaderScore.end(), [](const pair<string, int> &a, const pair<string, int> &b)
-       { return a.second > b.second; });
+  std::sort(leaderScore.begin(), leaderScore.end(),
+            [](const std::pair<std::string, int> &a, const std::pair<std::string, int> &b)
+            { return a.second > b.second; });
 
-  cout << "\n===== TOP 5 LEADERBOARD =====\n";
+  std::cout << "\n===== TOP 5 LEADERBOARD =====\n";
   int limit;
   if (leaderScore.size() < 5)
   {
     limit = leaderScore.size();
   }
-
   else
   {
     limit = 5;
@@ -262,17 +252,16 @@ void leaderboard(vector<pair<string, int>> &leaderScore)
 
   for (int i = 0; i < limit; i++)
   {
-    cout << (i + 1) << ". " << leaderScore[i].first << " - " << leaderScore[i].second << endl;
+    std::cout << (i + 1) << ". " << leaderScore[i].first << " - " << leaderScore[i].second << std::endl;
   }
 
-  cout << "=======================\n\n";
+  std::cout << "=======================\n\n";
 }
 
 void getChoice(int choice,
-               vector<Question>& quiz,
-               vector<pair<string, int>> &leaderScore)
+               std::vector<Question>& quiz,
+               std::vector<std::pair<std::string, int>> &leaderScore)
 {
-
   switch (choice)
   {
   case 1:
@@ -300,159 +289,146 @@ void getChoice(int choice,
     break;
 
   case 7:
-    cout << "Exiting...\n";
+    std::cout << "Exiting...\n";
     break;
 
   default:
-    cout << "Invalid choice! Try to enter a number instead.\n";
+    std::cout << "Invalid choice! Try to enter a number instead.\n";
     break;
   }
 }
 
-void shuffleQuestions(vector<Question> &quiz)
+void shuffleQuestions(std::vector<Question> &quiz)
 {
-
-  for (int k = 0; k < quiz.size(); k++)
+  for (int k = 0; k < (int)quiz.size(); k++)
   {
     int r = rand() % quiz.size();
-    swap(quiz[k], quiz[r]);
+    std::swap(quiz[k], quiz[r]);
   }
 }
 
-void loadQuiz(vector<Question>& quiz, int &score,
-              vector<pair<string, string>> &wrongAnswers)
+void loadQuiz(std::vector<Question>& quiz, int &score,
+              std::vector<std::pair<std::string, std::string>> &wrongAnswers)
 {
-
   shuffleQuestions(quiz);
 
-  for(Question &q : quiz)
+  for (Question &q : quiz)
   {
-
     q.print();
 
-    string input;
+    std::string input;
     char userChoice;
 
-    while(true) {
-
-      cout << "Your Answer (A/B/C/D): ";
-      cin >> input;
+    while (true)
+    {
+      std::cout << "Your Answer (A/B/C/D): ";
+      std::cin >> input;
 
       if (input.length() != 1)
       {
-        cout << "Invalid input! Please enter A, B, C, or D.\n";
+        std::cout << "Invalid input! Please enter A, B, C, or D.\n";
         continue;
       }
 
-    userChoice = input[0]; 
-    cin.ignore(10000, '\n');
+      userChoice = input[0];
+      std::cin.ignore(10000, '\n');
 
+      if (userChoice >= 'a' && userChoice <= 'd')
+      {
+        userChoice = std::toupper(userChoice);
+      }
 
-    if (userChoice >= 'a' && userChoice <= 'd')
-    {
-      userChoice = toupper(userChoice);
+      if (userChoice != 'A' && userChoice != 'B' && userChoice != 'C' && userChoice != 'D')
+      {
+        std::cout << "Invalid choice! Please enter A, B, C or D.\n";
+        continue;
+      }
+
+      break;
     }
 
-    if (userChoice != 'A' && userChoice != 'B' && userChoice != 'C' && userChoice != 'D') 
+    if (q.checkAnswer(userChoice))
     {
-      cout << "Invalid choice! Please enter A, B, C or D.\n";
-      continue;
+      score++;
+      std::cout << "Correct!" << std::endl;
+      std::cout << std::endl;
     }
-
-    break;
+    else
+    {
+      std::string correctText = q.getCorrectOptionText();
+      wrongAnswers.push_back({q.getText(), correctText});
+      std::cout << "Wrong! answer was " << correctText << "\n";
+    }
   }
-      if (q.checkAnswer(userChoice)) 
-        {
-          score++;
-          cout << "Correct!" << endl;
-          cout << endl;
-        }
-
-        else
-        {
-          string correctText = q.getCorrectOptionText();
-          wrongAnswers.push_back({q.getText(), correctText});
-          cout << "Wrong! answer was " << correctText << "\n";
-        }
- }
 }
 
-void reviewWrongAnswers(vector<pair<string, string>> wrongAnswers)
+void reviewWrongAnswers(std::vector<std::pair<std::string, std::string>> wrongAnswers)
 {
-
   if (wrongAnswers.empty())
   {
-    cout << "You got all questions correct! No review needed.\n";
+    std::cout << "You got all questions correct! No review needed.\n";
     return;
   }
 
-  cout << "===== REVIEW WRONG ANSWERS =====" << endl;
-  cout << "You got " << wrongAnswers.size() << " questions wrong:\n\n";
+  std::cout << "===== REVIEW WRONG ANSWERS =====" << std::endl;
+  std::cout << "You got " << wrongAnswers.size() << " questions wrong:\n\n";
 
   int questionNum = 1;
 
   for (auto x : wrongAnswers)
   {
-
-    cout << questionNum << ". ";
-    cout << "Question: " << x.first << endl;
-    cout << "Correct answer was: " << x.second << endl;
-    cout << endl;
+    std::cout << questionNum << ". ";
+    std::cout << "Question: " << x.first << std::endl;
+    std::cout << "Correct answer was: " << x.second << std::endl;
+    std::cout << std::endl;
 
     questionNum++;
   }
 
-  cout << "================================\n"
-       << endl;
+  std::cout << "================================\n" << std::endl;
 }
 
-void finalScorePrint(vector<pair<string, string>> &quiz, int &score)
+void finalScorePrint(std::vector<std::pair<std::string, std::string>> &quiz, int &score)
 {
-  cout << "Final Score: " << score << "/" << quiz.size() << endl;
+  std::cout << "Final Score: " << score << "/" << quiz.size() << std::endl;
 }
 
-void showStatistics(int score, int total, vector<pair<string, string>> wrongAnswers)
+void showStatistics(int score, int total, std::vector<std::pair<std::string, std::string>> wrongAnswers)
 {
-
   double accuracy = (score * 100.0) / total;
 
-  cout << "===== YOUR STATS =====" << endl;
-
-  cout << "Score: " << score << "/" << total << endl;
-  cout << "Accuracy: " << accuracy << "%\n";
+  std::cout << "===== YOUR STATS =====" << std::endl;
+  std::cout << "Score: " << score << "/" << total << std::endl;
+  std::cout << "Accuracy: " << accuracy << "%\n";
 
   if (accuracy >= 90)
   {
-    cout << "Excellent work!\n";
+    std::cout << "Excellent work!\n";
   }
-
   else if (accuracy >= 80)
   {
-    cout << "Good!\n";
+    std::cout << "Good!\n";
   }
-
   else if (accuracy >= 50)
   {
-    cout << "Well done!\n";
+    std::cout << "Well done!\n";
   }
-
   else if (accuracy >= 30)
   {
-    cout << "Poor!\n";
+    std::cout << "Poor!\n";
   }
-
   else if (accuracy >= 10)
   {
-    cout << "Really bad performance..\n";
+    std::cout << "Really bad performance..\n";
   }
 
-  string answer;
+  std::string answer;
 
   if (!wrongAnswers.empty())
   {
-    cout << "Would you like to review wrong answers? (y/n)\n";
-    cin >> answer;
-    cin.ignore(10000, '\n');
+    std::cout << "Would you like to review wrong answers? (y/n)\n";
+    std::cin >> answer;
+    std::cin.ignore(10000, '\n');
   }
 
   if (answer == "y" || answer == "Y" || answer == "yes" || answer == "Yes")
@@ -462,35 +438,31 @@ void showStatistics(int score, int total, vector<pair<string, string>> wrongAnsw
 
   if (answer == "n" || answer == "N")
   {
-
-    cout << "Thank you for playing the quiz!\n";
+    std::cout << "Thank you for playing the quiz!\n";
   }
 }
 
 void previousScores()
 {
-
-  ifstream file("playerScores/scores.txt");
+  std::ifstream file("playerScores/scores.txt");
   int previousScore;
   while (file >> previousScore)
   {
-    cout << "Previous Score: " << previousScore << endl;
+    std::cout << "Previous Score: " << previousScore << std::endl;
   }
-
   file.close();
 }
 
-void loadScores(string playerName, int score, int total)
+void loadScores(std::string playerName, int score, int total)
 {
-
-  vector<string> allLines;
+  std::vector<std::string> allLines;
   bool playerFound = false;
 
-  ifstream inFile("playerScores/scores.txt");
-  string name;
+  std::ifstream inFile("playerScores/scores.txt");
+  std::string name;
   int oldScore, oldTotal;
 
-  while (getline(inFile, name, ','))
+  while (std::getline(inFile, name, ','))
   {
     inFile >> oldScore;
     inFile.ignore();
@@ -504,7 +476,7 @@ void loadScores(string playerName, int score, int total)
       oldTotal = oldTotal + total;
     }
 
-    stringstream ss;
+    std::stringstream ss;
     ss << name << "," << oldScore << "," << oldTotal;
     allLines.push_back(ss.str());
   }
@@ -512,60 +484,62 @@ void loadScores(string playerName, int score, int total)
 
   if (!playerFound)
   {
-    stringstream ss;
+    std::stringstream ss;
     ss << playerName << "," << score << "," << total;
     allLines.push_back(ss.str());
   }
 
-  ofstream outFile("playerScores/scores.txt");
-  for (int i = 0; i < allLines.size(); i++)
+  std::ofstream outFile("playerScores/scores.txt");
+  for (int i = 0; i < (int)allLines.size(); i++)
   {
-    outFile << allLines[i] << endl;
+    outFile << allLines[i] << std::endl;
   }
   outFile.close();
 }
 
-void randomMixQuiz(vector<Question>& quiz)
+void randomMixQuiz(std::vector<Question>& quiz)
 {
-    quiz.clear();
+  quiz.clear();
 
-    vector<Question> allQuestions;
-    vector<Question> tempQuiz;
+  std::vector<Question> allQuestions;
+  std::vector<Question> tempQuiz;
 
-    geographyQuiz(tempQuiz);
-    allQuestions.insert(allQuestions.end(), tempQuiz.begin(), tempQuiz.end());
+  geographyQuiz(tempQuiz);
+  allQuestions.insert(allQuestions.end(), tempQuiz.begin(), tempQuiz.end());
 
-    historyQuiz(tempQuiz);
-    allQuestions.insert(allQuestions.end(), tempQuiz.begin(), tempQuiz.end());
+  historyQuiz(tempQuiz);
+  allQuestions.insert(allQuestions.end(), tempQuiz.begin(), tempQuiz.end());
 
-    programmingQuiz(tempQuiz);
-    allQuestions.insert(allQuestions.end(), tempQuiz.begin(), tempQuiz.end());
+  programmingQuiz(tempQuiz);
+  allQuestions.insert(allQuestions.end(), tempQuiz.begin(), tempQuiz.end());
 
-    generalQuiz(tempQuiz);
-    allQuestions.insert(allQuestions.end(), tempQuiz.begin(), tempQuiz.end());
+  generalQuiz(tempQuiz);
+  allQuestions.insert(allQuestions.end(), tempQuiz.begin(), tempQuiz.end());
 
-    for (size_t k = 0; k < allQuestions.size(); k++) {
-        size_t r = rand() % allQuestions.size();
-        swap(allQuestions[k], allQuestions[r]);
-    }
+  for (size_t k = 0; k < allQuestions.size(); k++)
+  {
+    size_t r = rand() % allQuestions.size();
+    std::swap(allQuestions[k], allQuestions[r]);
+  }
 
-    for (size_t i = 0; i < 15 && i < allQuestions.size(); i++) {
-        quiz.push_back(allQuestions[i]);
-    }
+  for (size_t i = 0; i < 15 && i < allQuestions.size(); i++)
+  {
+    quiz.push_back(allQuestions[i]);
+  }
 }
 
 int main()
 {
   srand(time(0));
 
-  vector<Question> quiz;
+  std::vector<Question> quiz;
   int choice = 0;
-  vector<pair<string, int>> leaderScore;
+  std::vector<std::pair<std::string, int>> leaderScore;
 
-  string playerName;
-  cout << "Enter your name : ";
-  getline(cin, playerName);
-  cout << "Welcome, " << playerName << "!\n\n";
+  std::string playerName;
+  std::cout << "Enter your name : ";
+  std::getline(std::cin, playerName);
+  std::cout << "Welcome, " << playerName << "!\n\n";
 
   while (choice != 7)
   {
@@ -589,13 +563,13 @@ int main()
     }
 
     int score = 0;
-    vector<pair<string, string>> wrongAnswers;
+    std::vector<std::pair<std::string, std::string>> wrongAnswers;
     loadQuiz(quiz, score, wrongAnswers);
     showStatistics(score, quiz.size(), wrongAnswers);
 
     loadScores(playerName, score, quiz.size());
 
-    cout << "\n";
+    std::cout << "\n";
   }
 
   return 0;
