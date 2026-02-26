@@ -50,7 +50,9 @@ bool sensitiveStrings(const string &text1,
   return j == text2.length();
 }
 
-void geographyQuiz(vector<pair<string, string>> &quiz)
+
+
+void geographyQuiz(vector<Question>& quiz)
 {
   quiz.clear();
 
@@ -65,6 +67,7 @@ void geographyQuiz(vector<pair<string, string>> &quiz)
   string question, optionA, optionB, optionC, optionD;
   char correctAnswer;
 
+
   while (getline(file, question, '|') &&
          getline(file, optionA, '|') &&
          getline(file, optionB, '|') &&
@@ -75,16 +78,14 @@ void geographyQuiz(vector<pair<string, string>> &quiz)
     file >> correctAnswer;
     file.ignore();
 
-    string fullQuestion = question + "~" + optionA + "~" + optionB + "~" + optionC + "~" + optionD;
+    Question q(question, {optionA, optionB, optionC, optionD}, correctAnswer);
+    quiz.push_back(q);
 
-    string answer(1, correctAnswer);
-
-    quiz.push_back({fullQuestion, answer});
   }
   file.close();
 }
 
-void historyQuiz(vector<pair<string, string>> &quiz)
+void historyQuiz(vector<Question>& quiz)
 {
   quiz.clear();
 
@@ -109,15 +110,14 @@ void historyQuiz(vector<pair<string, string>> &quiz)
     file >> correctAnswer;
     file.ignore();
 
-    string fullQuestion = question + "~" + optionA + "~" + optionB + "~" + optionC + "~" + optionD;
-    string answer(1, correctAnswer);
-    quiz.push_back({fullQuestion, answer});
+    Question q(question, {optionA, optionB, optionC, optionD}, correctAnswer);
+    quiz.push_back(q);
   }
 
   file.close();
 }
 
-void programmingQuiz(vector<pair<string, string>> &quiz)
+void programmingQuiz(vector<Question>& quiz)
 {
   quiz.clear();
 
@@ -142,14 +142,13 @@ void programmingQuiz(vector<pair<string, string>> &quiz)
     file >> correctAnswer;
     file.ignore();
 
-    string fullQuestion = question + "~" + optionA + "~" + optionB + "~" + optionC + "~" + optionD;
-    string answer(1, correctAnswer);
-    quiz.push_back({fullQuestion, answer});
+    Question q(question, {optionA, optionB, optionC, optionD}, correctAnswer);
+    quiz.push_back(q);
   }
   file.close();
 }
 
-void generalQuiz(vector<pair<string, string>> &quiz)
+void generalQuiz(vector<Question>& quiz)
 {
 
   quiz.clear();
@@ -175,9 +174,8 @@ void generalQuiz(vector<pair<string, string>> &quiz)
     file >> correctAnswer;
     file.ignore();
 
-    string fullQuestion = question + "~" + optionA + "~" + optionB + "~" + optionC + "~" + optionD;
-    string answer(1, correctAnswer);
-    quiz.push_back({fullQuestion, answer});
+    Question q(question, {optionA, optionB, optionC, optionD}, correctAnswer);
+    quiz.push_back(q);
   }
   file.close();
 }
@@ -209,9 +207,9 @@ int showMenu()
 
     cin.ignore(10000, '\n');
 
-    if (choice < 1 || choice > 6)
+    if (choice < 1 || choice > 7)
     {
-      cout << "Invalid! Enter 1-6.\n\n";
+      cout << "Invalid! Enter 1-7.\n\n";
       continue;
     }
 
@@ -271,7 +269,7 @@ void leaderboard(vector<pair<string, int>> &leaderScore)
 }
 
 void getChoice(int choice,
-               vector<pair<string, string>> &quiz,
+               vector<Question>& quiz,
                vector<pair<string, int>> &leaderScore)
 {
 
@@ -311,7 +309,7 @@ void getChoice(int choice,
   }
 }
 
-void shuffleQuestions(vector<pair<string, string>> &quiz)
+void shuffleQuestions(vector<Question> &quiz)
 {
 
   for (int k = 0; k < quiz.size(); k++)
@@ -321,102 +319,62 @@ void shuffleQuestions(vector<pair<string, string>> &quiz)
   }
 }
 
-void loadQuiz(vector<pair<string, string>> &quiz, int &score,
+void loadQuiz(vector<Question>& quiz, int &score,
               vector<pair<string, string>> &wrongAnswers)
 {
 
   shuffleQuestions(quiz);
 
-  for (size_t i = 0; i < quiz.size(); i++)
+  for(Question &q : quiz)
   {
-    string question, optionA, optionB, optionC, optionD;
 
-    stringstream ss(quiz[i].first);
-    getline(ss, question, '~');
-    getline(ss, optionA, '~');
-    getline(ss, optionB, '~');
-    getline(ss, optionC, '~');
-    getline(ss, optionD, '~');
+    q.print();
 
-    string correctAnswer = quiz[i].second;
-
-    vector<string> options;
-    options.push_back(optionA);
-    options.push_back(optionB);
-    options.push_back(optionC);
-    options.push_back(optionD);
-
-    for (int k = 0; k < options.size(); k++)
-    {
-      int r = rand() % options.size();
-      swap(options[k], options[r]);
-    }
-
-    cout << "\nQuestion " << (i + 1) << ": " << question << endl;
-    cout << "A) " << options[0] << endl;
-    cout << "B) " << options[1] << endl;
-    cout << "C) " << options[2] << endl;
-    cout << "D) " << options[3] << endl;
-
-    cout << "Your Answer (A/B/C/D): ";
     string input;
-    cin >> input;
+    char userChoice;
 
-    if (input.length() != 1)
-    {
-      cout << "Invalid input! Please enter A, B, C, or D.\n";
-      i--;
-      continue;
-    }
+    while(true) {
 
-    char userChoice = input[0];
+      cout << "Your Answer (A/B/C/D): ";
+      cin >> input;
 
+      if (input.length() != 1)
+      {
+        cout << "Invalid input! Please enter A, B, C, or D.\n";
+        continue;
+      }
+
+    userChoice = input[0]; 
     cin.ignore(10000, '\n');
+
 
     if (userChoice >= 'a' && userChoice <= 'd')
     {
-      userChoice -= 32;
+      userChoice = toupper(userChoice);
     }
 
-    if (userChoice != 'A' && userChoice != 'B' && userChoice != 'C' && userChoice != 'D')
+    if (userChoice != 'A' && userChoice != 'B' && userChoice != 'C' && userChoice != 'D') 
     {
       cout << "Invalid choice! Please enter A, B, C or D.\n";
-      i--;
       continue;
     }
 
-    string correctAnswerText;
-    if (correctAnswer == "A")
-      correctAnswerText = optionA;
-    else if (correctAnswer == "B")
-      correctAnswerText = optionB;
-    else if (correctAnswer == "C")
-      correctAnswerText = optionC;
-    else if (correctAnswer == "D")
-      correctAnswerText = optionD;
-
-    string userPickedText;
-    if (userChoice == 'A')
-      userPickedText = options[0];
-    else if (userChoice == 'B')
-      userPickedText = options[1];
-    else if (userChoice == 'C')
-      userPickedText = options[2];
-    else if (userChoice == 'D')
-      userPickedText = options[3];
-
-    if (userPickedText == correctAnswerText)
-    {
-      score++;
-      cout << "Correct!" << endl;
-    }
-
-    else
-    {
-      cout << "Wrong! the answer was " << correctAnswerText << endl;
-      wrongAnswers.push_back({question, correctAnswerText});
-    }
+    break;
   }
+      if (q.checkAnswer(userChoice)) 
+        {
+          score++;
+          cout << "Correct!" << endl;
+          cout << endl;
+        }
+
+        else
+        {
+          string correctText = q.getCorrectOptionText();
+          wrongAnswers.push_back({q.getText(), correctText});
+          cout << "Wrong! answer was " << correctText << "\n";
+        }
+ }
 }
 
 void reviewWrongAnswers(vector<pair<string, string>> wrongAnswers)
@@ -567,55 +525,40 @@ void loadScores(string playerName, int score, int total)
   outFile.close();
 }
 
-void randomMixQuiz(vector<pair<string, string>> &quiz)
+void randomMixQuiz(vector<Question>& quiz)
 {
+    quiz.clear();
 
-  quiz.clear();
+    vector<Question> allQuestions;
+    vector<Question> tempQuiz;
 
-  vector<pair<string, string>> allQuestions;
-  vector<pair<string, string>> tempQuiz;
+    geographyQuiz(tempQuiz);
+    allQuestions.insert(allQuestions.end(), tempQuiz.begin(), tempQuiz.end());
 
-  geographyQuiz(tempQuiz);
-  for (int i = 0; i < tempQuiz.size(); i++)
-  {
-    allQuestions.push_back(tempQuiz[i]);
-  }
+    historyQuiz(tempQuiz);
+    allQuestions.insert(allQuestions.end(), tempQuiz.begin(), tempQuiz.end());
 
-  historyQuiz(tempQuiz);
-  for (int i = 0; i < tempQuiz.size(); i++)
-  {
-    allQuestions.push_back(tempQuiz[i]);
-  }
+    programmingQuiz(tempQuiz);
+    allQuestions.insert(allQuestions.end(), tempQuiz.begin(), tempQuiz.end());
 
-  programmingQuiz(tempQuiz);
-  for (int i = 0; i < tempQuiz.size(); i++)
-  {
-    allQuestions.push_back(tempQuiz[i]);
-  }
+    generalQuiz(tempQuiz);
+    allQuestions.insert(allQuestions.end(), tempQuiz.begin(), tempQuiz.end());
 
-  generalQuiz(tempQuiz);
-  for (int i = 0; i < tempQuiz.size(); i++)
-  {
-    allQuestions.push_back(tempQuiz[i]);
-  }
+    for (size_t k = 0; k < allQuestions.size(); k++) {
+        size_t r = rand() % allQuestions.size();
+        swap(allQuestions[k], allQuestions[r]);
+    }
 
-  for (int k = 0; k < allQuestions.size(); k++)
-  {
-    int r = rand() % allQuestions.size();
-    swap(allQuestions[k], allQuestions[r]);
-  }
-
-  for (int i = 0; i < 15 && i < allQuestions.size(); i++)
-  {
-    quiz.push_back(allQuestions[i]);
-  }
+    for (size_t i = 0; i < 15 && i < allQuestions.size(); i++) {
+        quiz.push_back(allQuestions[i]);
+    }
 }
 
 int main()
 {
   srand(time(0));
 
-  vector<pair<string, string>> quiz;
+  vector<Question> quiz;
   int choice = 0;
   vector<pair<string, int>> leaderScore;
 
